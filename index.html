@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Malla interactiva</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Malla interactiva</h1>
+  <p>Haz clic en un ramo para aprobarlo.</p>
+
+  <div class="malla">
+    <div class="semestre">
+      <h2>Semestre 1</h2>
+      <button class="ramo" data-id="MAT1000">Precalculo (MAT1000)</button>
+      <button class="ramo" data-id="FIS1503">Física general (1503)</button>
+      <button class="ramo" data-id="BIO141C">Biocel (BIO141C)</button>
+      <button class="ramo" data-id="EAE1110">Introducción a microeconomía (EAE1110)</button>
+      <button class="ramo" data-id="AFGDEP">AFG deporte</button>
+      <button class="ramo" data-id="TALLER1">Taller de iniciación</button>
+    </div>
+
+    <div class="semestre">
+      <h2>Semestre 2</h2>
+      <button class="ramo bloqueado" data-id="MAT1610" data-prerreq="MAT1000">Cálculo 1 (MAT1610)</button>
+      <button class="ramo" data-id="QIM100">Química general (QIM100)</button>
+      <button class="ramo" data-id="MAT1279">Intro a álgebra (MAT1279)</button>
+      <button class="ramo" data-id="EAA1210">Contabilidad (EAA1210)</button>
+      <button class="ramo" data-id="OPT">Optativo Biología o Física o Química</button>
+    </div>
+
+    <div class="semestre">
+      <h2>Semestre 3</h2>
+      <button class="ramo bloqueado" data-id="MAT1620" data-prerreq="MAT1610">Cálculo 2 (MAT1620)</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
