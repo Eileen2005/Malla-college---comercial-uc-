@@ -1,27 +1,34 @@
 const ramos = document.querySelectorAll(".ramo");
-let aprobados = [];
+let aprobados = JSON.parse(localStorage.getItem("aprobados")) || [];
+
+function guardarEstado() {
+  localStorage.setItem("aprobados", JSON.stringify(aprobados));
+}
+
+function cumplePrerrequisitos(ramo) {
+  const prerreq = ramo.dataset.prerreq;
+  if (!prerreq) return true;
+
+  const requisitos = prerreq.split(",").map(r => r.trim());
+  return requisitos.every(req => aprobados.includes(req));
+}
 
 function actualizarMalla() {
   ramos.forEach(ramo => {
     const id = ramo.dataset.id;
-    const prerreq = ramo.dataset.prerreq;
 
     ramo.classList.remove("aprobado");
+    ramo.classList.remove("bloqueado");
 
     if (aprobados.includes(id)) {
       ramo.classList.add("aprobado");
     }
 
-    if (prerreq) {
-      if (aprobados.includes(prerreq)) {
-        ramo.classList.remove("bloqueado");
-        ramo.disabled = false;
-      } else {
-        if (!aprobados.includes(id)) {
-          ramo.classList.add("bloqueado");
-        }
-        ramo.disabled = !aprobados.includes(id);
-      }
+    if (!cumplePrerrequisitos(ramo) && !aprobados.includes(id)) {
+      ramo.classList.add("bloqueado");
+      ramo.disabled = true;
+    } else {
+      ramo.disabled = false;
     }
   });
 }
@@ -38,6 +45,7 @@ ramos.forEach(ramo => {
       aprobados.push(id);
     }
 
+    guardarEstado();
     actualizarMalla();
   });
 });
